@@ -117,6 +117,10 @@ pageList.controller('arcListCtrl',function($scope,$http,$location){
 
 
     }
+    //删除开始
+    $scope.del = function(index,id){
+
+    }
 })
 var addCont = angular.module('addCont',[]);
 addCont.controller('addContCtrl',function($scope,$http){
@@ -242,6 +246,18 @@ modifyCont.controller('modifyContCtrl',
             })
         }
 
+})
+//详情模块
+var showCont = angular.module('showCont',[]);
+showCont.controller('showContCtrl',function($scope,$http,$stateParams){
+    $http({
+        method:'GET',
+        url:'get.php?action=get_article&id=' + $stateParams.Id
+    }).success(function(data){
+        $scope.lists = data;
+    }).error(function(err){
+        console.log(err);
+    })
 })
 
 
