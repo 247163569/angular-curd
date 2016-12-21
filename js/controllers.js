@@ -118,9 +118,42 @@ pageList.controller('arcListCtrl',function($scope,$http,$location){
 
     }
     //删除开始
-    $scope.del = function(index,id){
+    $scope.del = function (index,id) {
+        $http({
+            metdod:'GET',
+            url:'get.php?action=delete_article&index='+ index + '&id=' + id,
+        }).success(function (data) {
+            if (data.code==101) {
+                //删除成功
+                //console.log('删除成功');
+                $scope.meg_success="删除成功!";
+                $scope.meg_error="";
+//                setTimeout(function(){location.href='#/list/0'}, 1000);
+                //重新发送ajax请求 页面
+                $http({
+                    method: 'GET',
+                    url: $geturl,
+                }).success(function (data) {
+                    $scope.lists = data;
+                }).error(function (err) {
+                })
+                $http({
+                    method: 'GET',
+                    url: get_total_url
+                }).success(function (data) {
+                    $scope.paginationConf.totalItems = data.total;
+                }).error(function (err) {
+                    console.log(err);
+                })
 
+            } else {
+                //添加失败
+                //console.log('删除失败');
+                $scope.meg_error="删除失败";
+            }
+        })
     }
+
 })
 var addCont = angular.module('addCont',[]);
 addCont.controller('addContCtrl',function($scope,$http){
