@@ -483,7 +483,7 @@ addCont.controller('AddContCtrl',function($scope,$http){
 
 2、创建修改页面modify.html
 
-<div class="container" an-app="pageList">
+<div class="container">
 	<div class="page-header">
 		<h2>Angularjs 前端MVC开发实例</h2>
 	</div>

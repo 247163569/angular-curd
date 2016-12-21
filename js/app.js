@@ -1,5 +1,5 @@
 //1.创建routerApp模块，引入ui.router路由
-var routerApp = angular.module('routerApp',['ui.router','loginApp']);
+var routerApp = angular.module('routerApp',['ui.router','loginApp','pageList','xg.page','addCont','modifyCont']);
 //2.调用run方法,对项目进行一些初始化的操作.
 routerApp.run(function($rootScope,$state,$stateParams){
     $rootScope.$state = $state;
@@ -17,6 +17,50 @@ routerApp.config(function($stateProvider,$urlRouterProvider){
                 },
                 'main@index':{
                     templateUrl:'tpls/login.html'
+                }
+            }
+        })
+        .state('list',{
+            url:'/list/{type:[0-9]{1,4}}',
+            //当前，我点击全部，点击前端，点击IOS，点击安卓
+            //打开的都是这个页面.
+            views:{
+                '':{
+                    templateUrl:'tpls/list.html'
+                },
+                'type@list':{
+                    templateUrl:'tpls/type.html'
+                },
+                'grid@list':{
+                    templateUrl:'tpls/grid.html'
+                }
+            }
+        })
+        .state('add',{
+            url:'/add',
+            views:{
+                '':{
+                    templateUrl:'tpls/add.html'
+                },
+                'type@add':{
+                    templateUrl:'tpls/type.html'
+                },
+                'addcon@add':{
+                    templateUrl:'tpls/addcon.html'
+                }
+            }
+        })
+        .state('modify',{
+            url:'/modify/:Id',
+            views:{
+                '':{
+                    templateUrl:'tpls/modify.html'
+                },
+                'type@modify':{
+                    templateUrl:'tpls/type.html'
+                },
+                'modifycon@modify':{
+                    templateUrl:'tpls/modifycon.html'
                 }
             }
         })
